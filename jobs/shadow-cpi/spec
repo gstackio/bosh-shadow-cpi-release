@@ -1,0 +1,32 @@
+---
+name: shadow-cpi
+
+templates:
+  bin/pre-start.sh: bin/pre-start
+  bin/shadow-cpi.sh: bin/cpi
+  config/id_rsa: config/id_rsa
+
+packages: []
+
+properties:
+  ssh.remote-host:
+    description: |
+      The SSH remote host where the actual CPI is to be found.
+    default: "192.168.50.6"
+  ssh.remote-user:
+    description: |
+      The remote SSH user to connect with. Depending on the remote CPI
+      requirements, this user might need to be sudoer.
+    default: cpi-runner
+  ssh.private-key:
+    description: |
+      The SSH private key to use when connecting to the remote host with the
+      specified user.
+  remote-cpi-binary:
+    description: |
+      The absolute path at which the CPI binary is to be found on the remote
+      host.
+
+      This is usually the wrapper script in '/var/vcap/jobs' in order to run
+      the actual binary with the correct configuration file.
+    default: /var/vcap/jobs/warden_cpi/bin/cpi
