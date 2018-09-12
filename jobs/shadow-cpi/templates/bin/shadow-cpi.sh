@@ -15,6 +15,7 @@ remote_cpi_bin=<%= esc(p('remote-cpi-binary')) %>
 ssh -v -E /var/vcap/sys/log/shadow-cpi/shadow-cpi-ssh.log \
     -x \
     -i /var/vcap/jobs/shadow-cpi/config/id_rsa \
-    -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null \
-    "${remote_user}@${remote_host}" "${remote_cpi_bin}"
+    "${remote_user}@${remote_host}" \
+    "${remote_cpi_bin}" \
+    2> /dev/null
 exit $?
