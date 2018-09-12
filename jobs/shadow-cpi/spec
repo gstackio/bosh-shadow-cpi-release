@@ -4,6 +4,7 @@ name: shadow-cpi
 templates:
   bin/pre-start.sh: bin/pre-start
   bin/accept-ecdsa-host-key.sh: bin/accept-ecdsa-host-key.sh
+  bin/create-remote-tmp-dir.sh: bin/create-remote-tmp-dir.sh
   bin/shadow-cpi.sh: bin/cpi
   config/id_rsa: config/id_rsa
 
