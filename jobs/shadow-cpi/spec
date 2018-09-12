@@ -18,6 +18,9 @@ properties:
       The remote SSH user to connect with. Depending on the remote CPI
       requirements, this user might need to be sudoer.
     default: cpi-runner
+  ssh.remote-host-key:
+    description: |
+      The SSH remote host key to be trusted.
   ssh.private-key:
     description: |
       The SSH private key to use when connecting to the remote host with the
