@@ -23,13 +23,15 @@ echo -e "\n$(date +%F_%T)\n" \
     >> /var/vcap/sys/log/shadow-cpi/shadow-cpi-ssh.log
 
 if [[ $request == '{"method":"create_stemcell",'* ]]; then
+    # Copy the stemcell image file to the remote host
     stemcell_path=$(sed -e 's/^.*,"arguments":\["\([^"]*\)",.*$/\1/' <<< "$request")
     target_path=$(sed -e 's|/var/vcap/data/director/tmp/\(stemcell[^/]*\)/image|/var/vcap/data/shadow-cpi/tmp/\1-image|' <<< "$stemcell_path")
     scp -q -i /var/vcap/jobs/shadow-cpi/config/id_rsa \
         "${stemcell_path}" \
         "${remote_user}@${remote_host}:${target_path}"
 
-    # Translate stemcell path in request and log the resulting translated request
+    # Translate stemcell path in request and log the resulting translated
+    # request
     request=$(sed -e "s|${stemcell_path}|${target_path}|" <<< "${request}")
     echo -e "\n$(date +%F_%T): TR-REQ '$request'" \
         >> /var/vcap/sys/log/shadow-cpi/cpi.log
@@ -46,6 +48,7 @@ response=$(ssh -v -E /var/vcap/sys/log/shadow-cpi/shadow-cpi-ssh.log \
 status=$?
 
 if [[ -n $target_path ]]; then
+    # Remove the temporary stemcell image file
     ssh -x \
         -i /var/vcap/jobs/shadow-cpi/config/id_rsa \
         "${remote_user}@${remote_host}" \
