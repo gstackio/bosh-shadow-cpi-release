@@ -1,0 +1,9 @@
+name: bosh-shadow-cpi
+version: 1.0.0
+commit_hash: 02532c5
+uncommitted_changes: false
+jobs:
+- name: shadow-cpi
+  version: 7d949adb19a153e96410ee398f872ac6b5af00d7
+  fingerprint: 7d949adb19a153e96410ee398f872ac6b5af00d7
+  sha1: 643f90ebfbd4630ed71d10cdfb4b7a5c893846d7
